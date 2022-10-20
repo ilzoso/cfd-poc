@@ -1,0 +1,165 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$primary: (
+    Main:#005b00,
+    Light:#3f8931,
+    Dark: #003000,
+    contrast: (Main: #fff,
+        Light: #000,
+        Dark: #fff)
+);
+$accent: (
+    Main: #f57c00,
+    Light: #ffad42,
+    Dark: #bb4d00,
+    contrast: (Main: #fff,
+        Light: #fff,
+        Dark: #fff)
+);
+$warning: (
+    Main: #f44336,
+    Light: #ff7961,
+    Dark: #ba000d,
+    contrast: (Main: #fff,
+        Light: #fff,
+        Dark: #fff)
+);
+$warning2: (
+    Main: #f06292,
+    Light: #ff94c2,
+    Dark: #ba2d65,
+    contrast: (Main: #fff,
+        Light: #fff,
+        Dark: #fff)
+);
+$warn: mat.$red-palette;
+
+/**
+$my-primary: mat.define-palette(mat.$indigo-palette, 500);
+$my-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+                warn: $warn
+            )));
+
+@include mat.all-component-themes($my-theme);
+
+@include mat.all-component-themes($my-theme);
+@include mat.all-component-themes($my-theme);
+
+
+
+
+
+.custom-theme {
+    $custom-primary: mat.define-palette(mat.$blue-grey-palette);
+    $custom-accent: mat.define-palette(mat.$yellow-palette);
+//    $custom-primary: mat.define-palette($primary, Main, Light, Dark);
+//    $custom-accent: mat.define-palette($accent, Main, Light, Dark);
+    $custom-warn: mat.define-palette($warn, A200, A400, A700);
+    $custom-typography: mat.define-typography-config( // Specify "Comic Sans" as the default font family for all levels.
+        $font-family: 'Roboto'
+    );
+
+    $custom-theme: mat.define-light-theme((color: (primary: $my-primary,
+                accent: $my-accent,
+                warn: $warn ),
+            typography: $custom-typography,
+        ));
+
+    @include mat.all-component-themes($custom-theme);
+}
+**/
+
+//$custom-primary: mat.define-palette(mat.$blue-grey-palette);
+//$custom-accent: mat.define-palette(mat.$yellow-palette);
+$custom-primary: mat.define-palette($primary, Main, Light, Dark);
+$custom-accent: mat.define-palette($accent, Main, Light, Dark);
+$custom-warn: mat.define-palette($warning, Main, Light, Dark);
+$custom-typography: mat.define-typography-config( // Specify "Comic Sans" as the default font family for all levels.
+        $font-family: 'Roboto'
+    );
+
+$custom-theme: mat.define-light-theme((color: (primary: $custom-primary,
+                accent: $custom-accent,
+                warn: $custom-warn ),
+            typography: $custom-typography,
+        ));
+
+@include mat.all-component-themes($custom-theme);
+
+
+@font-face {
+    font-family: Roboto;
+    src_: url(/assets/fonts/Oxygen/Oxygen-Light.ttf);
+    src: url(/assets/fonts/Roboto/Roboto-Regular.ttf);
+}
+
+@import url(assets/material-icons/css/material-icons.min.css);
+
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, 'Comic Sans', "Helvetica Neue", sans-serif;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 400;
+    z-index: 10;
+}
+
+a,
+a:visited,
+a:hover {
+    color: #1976d2;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #125699;
+}
+
+.header {
+    font-weight: 400;
+    background: linear-gradient(to bottom, #005b00, #3f8931) !important;
+    color: #fff;
+}
+
+footer {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+}
+
+footer a {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 767px) {}
+
+@media screen and (max-width: 575px) {}
