@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSliderModule,
     MatTableModule,
     MatPaginatorModule, 
+    MatProgressBarModule, 
     MatFormFieldModule, 
     MatInputModule, 
     MatGridListModule, 

@@ -1,20 +1,25 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { InvoiceItem } from './interfaces/InvoiceItem';
 import { CfdDataService } from './services/cfd-data.service';
+import { InvoiceItemDataSource } from './services/invoice-item-datasource';
 
 @Component({
   selector: 'cfd-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'cfd-poc';
   displayedColumns: string[] = ['cid', 'fin', 'invoiceid', 'description', 'invoiceamount', 'periodend', 'paymentamount', 'paymentdate'];
   dataSource2: MatTableDataSource<PeriodicElement>;
   dataSource: MatTableDataSource<InvoiceItem>;
+
+  dataSource0: InvoiceItemDataSource;
+  isLoading: boolean;
+
   tiles: Tile[] = [
     { text: 'One', cols: 1, rows: 1, color: 'lightblue' },
     { text: 'Two', cols: 1, rows: 1, color: 'lightgreen' },
@@ -24,12 +29,17 @@ export class AppComponent implements AfterViewInit {
 
   invoiceitems!: InvoiceItem[];
 
+  ngOnInit() {
+  }
 
   constructor(private dataService: CfdDataService) {
     this.dataSource2 = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
     let data2 = dataService.getEmptyInvoiceItems();
     let data = dataService.getAllInvoiceItems();
     this.dataSource = new MatTableDataSource<InvoiceItem>(data);
+    this.dataSource0 = new InvoiceItemDataSource(this.dataService);
+    this.dataSource0.loadInvoices("", "");
+    this.isLoading = false;
   }
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -38,6 +48,16 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  applyFilter01(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource0.loadInvoices(filterValue.trim(), "");
+  }
+
+  applyFilter02(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource0.loadInvoices("0", filterValue.trim());
   }
 
   applyFilter1(event: Event) {

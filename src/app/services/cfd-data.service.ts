@@ -20,18 +20,23 @@ export class CfdDataService {
   constructor(private http: HttpClient, private config: ConfigService) {
     this.baseUri = config.getApiUri();
     this.invoicesBaseUri = this.baseUri + '/api/invoices';
+    this.invoicesBaseUri = this.baseUri + '/api/fees/search';
     this.reregistrationsBaseUri = this.baseUri + '/api/reregistrations';
     this.customersBaseUri = this.baseUri + '/api/customers';
   }
 
   getInvoiceItemsAsync(cid: string, fin: string) {
-    return this.http.get<InvoiceItem[]>(`${this.invoicesBaseUri}?cid=${cid}&fin=${fin}`, {
+//    return this.http.get<InvoiceItem[]>(`${this.invoicesBaseUri}?cid=${cid}&fin=${fin}`, {
+    return this.http.get<InvoiceItem[]>(`${this.invoicesBaseUri}/${cid}/${fin}`, {
       observe: 'response', params: new HttpParams().set("cid", cid).set("fin", fin)
     }).pipe(
       map(res => {
-        return {
-          results: res.body as InvoiceItem[]
-        }
+        console.log(res);
+        var r = res.body as InvoiceItem[];
+        return r;
+        //return {
+        //  results: res.body as InvoiceItem[]
+        //}
       }), 
       catchError(this.handleError)
     );

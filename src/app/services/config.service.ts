@@ -8,6 +8,7 @@ export class ConfigService {
   constructor() { }
 
   getApiUri(): string {
+    return "https://localhost:7050";
     return `https://localhost`;
     //const port = ":443";
     //return `${this.window.location.protocol}//${this.window.location.hostname}${port}`;
